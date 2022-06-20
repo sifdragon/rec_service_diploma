@@ -167,7 +167,7 @@ def calculateSimilarItems(prefs, n=10):
 # Получить рекомендации для заданного человека, пользуясь взвешенным средним
 # оценок, похожих на оцененные пользователем объектов
 
-def getRecommendedItems(prefs, itemMatch, user):
+def getRecommendedItems(prefs, itemMatch, user, products):
     # инициализируем словари
     userRatings = prefs[user]
     scores = {}
@@ -185,6 +185,8 @@ def getRecommendedItems(prefs, itemMatch, user):
             scores.setdefault(item2, 0)
             scores[item2] = scores[item2] + similarity * rating
             # ДОБАВИТЬ ТУТ
+            if item2 in products:
+                scores[item2] *= 2
             # сумма всех коэффициентов подобия
             totalSim.setdefault(item2, 0)
             totalSim[item2] = totalSim[item2] + similarity

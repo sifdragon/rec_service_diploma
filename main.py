@@ -12,9 +12,11 @@ router = APIRouter()
 async def say_hello(r: Request):
     json = await r.json()
     user = r.headers.get('user')
-    recs = get_recs(json, user)
-    print(recs)
-    return recs
+    recs = json.get('recs')
+    products = json.get('products')
+    recommendations = get_recs(recs, products, user)
+    print(recommendations)
+    return recommendations
 
 
 @app.post("/cartRecs")

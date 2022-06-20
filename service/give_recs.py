@@ -2,10 +2,10 @@ from service.rec_methods import calculateSimilarItems, getRecommendedItems, getR
 from dto import ItemUserDto
 
 
-def get_recs(itemUserDto: ItemUserDto, user: str):
+def get_recs(itemUserDto: ItemUserDto, products, user: str):
     itemsim = calculateSimilarItems(itemUserDto, n=5)
 
-    rec_items = getRecommendedItems(itemUserDto, itemsim, user)
+    rec_items = getRecommendedItems(itemUserDto, itemsim, user, products)
 
 
     items = []
@@ -13,7 +13,8 @@ def get_recs(itemUserDto: ItemUserDto, user: str):
         for item in cort:
             if isinstance(item, str):
                 items.append(item)
-    return items
+    firstThree = items[0:3]
+    return firstThree
 
 
 def get_cart_recs(itemUserDto: ItemUserDto):
